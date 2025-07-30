@@ -29,7 +29,7 @@ const mocks = [
     categoria: 'Ação',
     imagem: '',
     plataformas: ['PS5', 'Xbox Series S/X'],
-    preco: 189.9,
+    preco: 150,
     precoAntigo: 200,
     titulo: 'Gotham Knights'
   },
@@ -53,7 +53,7 @@ const server = setupServer(
   )
 )
 
-describe('Testes para o container Produtos', () => {
+describe('Testes para o container produtos', () => {
   beforeAll(() => server.listen())
   afterEach(() => server.resetHandlers())
   afterAll(() => server.close())
@@ -63,9 +63,10 @@ describe('Testes para o container Produtos', () => {
     expect(screen.getByText('Carregando...')).toBeInTheDocument()
   })
 
-  test('Deve renderizar corretamente com a listagem de código', async () => {
-    renderizaComProvider(<Produtos />)
+  test('Deve renderizar corretamente com a listagem de jogos', async () => {
+    const { debug } = renderizaComProvider(<Produtos />)
     await waitFor(() => {
+      debug()
       expect(screen.getByText('Donkey Kong')).toBeInTheDocument()
     })
   })
